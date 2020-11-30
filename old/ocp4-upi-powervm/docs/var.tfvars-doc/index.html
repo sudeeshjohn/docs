@@ -8,23 +8,23 @@
   
   
   
-  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
   <title>How to use var.tfvars - Automation for OpenShift on IBM Power</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../../css/theme.css" />
-  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="../../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
     var mkdocs_page_name = "How to use var.tfvars";
-    var mkdocs_page_input_path = "ocp4-upi-powervs/docs/var.tfvars-doc.md";
+    var mkdocs_page_input_path = "old/ocp4-upi-powervm/docs/var.tfvars-doc.md";
     var mkdocs_page_url = null;
   </script>
   
-  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -38,9 +38,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../../.." class="icon icon-home"> Automation for OpenShift on IBM Power</a>
+        <a href="../../../.." class="icon icon-home"> Automation for OpenShift on IBM Power</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
                     </li>
                 </ul>
                 <ul>
@@ -72,7 +72,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../..">Automation for OpenShift on IBM Power</a>
+        <a href="../../../..">Automation for OpenShift on IBM Power</a>
       </nav>
 
       
@@ -80,7 +80,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../../..">Docs</a> &raquo;</li>
+    <li><a href="../../../..">Docs</a> &raquo;</li>
     
       
     
@@ -99,7 +99,7 @@
 <ul>
 <li><a href="#how-to-use-vartfvars">How to use var.tfvars</a></li>
 <li><a href="#introduction">Introduction</a><ul>
-<li><a href="#ibm-cloud-details">IBM Cloud Details</a></li>
+<li><a href="#powervc-details">PowerVC Details</a></li>
 <li><a href="#openshift-cluster-details">OpenShift Cluster Details</a></li>
 <li><a href="#openshift-installation-details">OpenShift Installation Details</a></li>
 <li><a href="#misc-customizations">Misc Customizations</a></li>
@@ -108,89 +108,31 @@
 </ul>
 <h2 id="introduction">Introduction</h2>
 <p>This guide gives an overview of the various terraform variables that are used for the deployment.
-The default values are set in <a href="../../variables.tf">variables.tf</a></p>
-<h3 id="ibm-cloud-details">IBM Cloud Details</h3>
-<p>These set of variables specify the access key and PowerVS location details.</p>
-<pre><code>ibmcloud_api_key    = &quot;xyzaaaaaaaabcdeaaaaaa&quot;
-ibmcloud_region     = &quot;xya&quot;
-ibmcloud_zone       = &quot;abc&quot;
-service_instance_id = &quot;abc123xyzaaaa&quot;
+The default values are set in <a href="../variables.tf">variables.tf</a></p>
+<h3 id="powervc-details">PowerVC Details</h3>
+<p>These set of variables specify the PowerVC details.</p>
+<pre><code>auth_url                    = &quot;&lt;https://&lt;HOSTNAME&gt;:5000/v3/&gt;&quot;
+user_name                   = &quot;&lt;powervc-login-user-name&gt;&quot;
+password                    = &quot;&lt;powervc-login-user-password&gt;&quot;
+tenant_name                 = &quot;&lt;tenant_name&gt;&quot;
+domain_name                 = &quot;Default&quot;
 </code></pre>
-<p>You'll need to create an API key to use the automation code. Please refer to the following instructions to generate API key - https://cloud.ibm.com/docs/account?topic=account-userapikey</p>
-<p>In order to retrieve the PowerVS region, zone and instance specific details please use the IBM Cloud CLI.</p>
-<ol>
-<li>Run <code>ibmcloud pi service-list</code>. It will list the service instance names with IDs.</li>
-<li>The ID will be of the form
-   <code>crn:v1:bluemix:public:power-iaas:eu-de-1:a/65b64c1f1c29460e8c2e4bbfbd893c2c:360a5df8-3f00-44b2-bd9f-d9a51fe53de6::</code></li>
-<li>The <strong>6th</strong> field is the <strong>ibmcloud_zone</strong> and <strong>8th</strong> field is the <strong>service_instance_id</strong>
-   <code>$ echo "crn:v1:bluemix:public:power-iaas:eu-de-1:a/65b64c1f1c29460e8c2e4bbfbd893c2c:360a5df8-3f00-44b2-bd9f-d9a51fe53de6::" | cut -f6,8 -d":"
-   eu-de-1:360a5df8-3f00-44b2-bd9f-d9a51fe53de6</code></li>
-</ol>
-<p>Following are the region and zone mapping:</p>
-<table>
-<thead>
-<tr>
-<th>ibmcloud_region</th>
-<th>ibmcloud_zone</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>eu-de</td>
-<td>eu-de-1</td>
-</tr>
-<tr>
-<td>lon</td>
-<td>lon0</td>
-</tr>
-<tr>
-<td>tor</td>
-<td>tor01</td>
-</tr>
-</tbody>
-</table>
-<p>Tieing all these, the values to be used will be as shown below:
-   <code>ibmcloud_region     = eu-de
-   ibmcloud_zone       = eu-de-1
-   service_instance_id = 360a5df8-3f00-44b2-bd9f-d9a51fe53de6</code></p>
+<p>This variable specifies the network that will be used by the VMs</p>
+<pre><code>network_name                = &quot;&lt;network_name&gt;&quot;
+</code></pre>
+<p>This variable specifies the availability zone (PowerVC Host Group) in which to create the VMs. Leave it empty to use the "default" availability zone.</p>
+<pre><code>openstack_availability_zone = &quot;&quot;
+</code></pre>
 <h3 id="openshift-cluster-details">OpenShift Cluster Details</h3>
 <p>These set of variables specify the cluster capacity.</p>
-<p>Change the values as per your requirement.
-The defaults (recommended config) should suffice for most of the common use-cases.</p>
-<pre><code>bastion     = {memory      = &quot;16&quot;,   processors  = &quot;1&quot;,    &quot;count&quot;   = 1}
-bootstrap   = {memory      = &quot;16&quot;,   processors  = &quot;0.5&quot;,  &quot;count&quot;   = 1}
-master      = {memory      = &quot;16&quot;,   processors  = &quot;0.5&quot;,  &quot;count&quot;   = 3}
-worker      = {memory      = &quot;32&quot;,   processors  = &quot;0.5&quot;,  &quot;count&quot;   = 2}
+<pre><code>bastion                     = {instance_type    = &quot;&lt;bastion-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhel&gt;&quot;}
+bootstrap                   = {instance_type    = &quot;&lt;bootstrap-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhcos&gt;&quot;,  &quot;count&quot;   = 1}
+master                      = {instance_type    = &quot;&lt;master-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhcos&gt;&quot;,  &quot;count&quot;   = 3}
+worker                      = {instance_type    = &quot;&lt;worker-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhcos&gt;&quot;,  &quot;count&quot;   = 2}
 </code></pre>
-<p><code>memory</code> is in <code>GBs</code> and <code>count</code> specifies the number of VMs that should be created for each type.</p>
-<p>To enable high availability (HA) for cluster services running on the bastion set the bastion <code>count</code> value to 2. 
-Note that in case of HA, the automation will not setup NFS storage. <code>count</code> of 1 for bastion implies the default non-HA bastion setup.</p>
-<p>You can optionally set the worker <code>count</code> value to 0 in which case all the cluster pods will be running on the master/supervisor nodes. 
+<p><code>instance_type</code> is the compute template to be used and <code>image_id</code> is the image UUID. <code>count</code> specifies the number of VMs that should be created for each type.</p>
+<p>You can optionally set worker <code>count</code> value to 0 in which case all the cluster pods will be running on the master/supervisor nodes. 
 Ensure you use proper sizing for master/supervisor nodes to avoid resource starvation for containers.</p>
-<p>For PowerVS processors are equal to entitled physical count. So <strong>N</strong> processors == <strong>N</strong> physical core entitlements == <strong>ceil[N]</strong> vCPUs.
-Here are some examples to help you understand the relationship.</p>
-<ul>
-<li>Example 1
-  <code>0.5 processors == 0.5 physical core entitlements == ceil[0.5] = 1 vCPU == 8 logical OS CPUs (SMT=8)</code></li>
-<li>Example 2
-  <code>1.5 processors == 1.5 physical core entitlements == ceil[1.5] = 2 vCPU == 16 logical OS CPUs (SMT=8)</code></li>
-<li>Example 3
-  <code>2 processors == 2 physical core entitlements == ceil[2] = 2 vCPU == 16 logical OS CPUs (SMT=8)</code></li>
-</ul>
-<p>These set of variables specify the RHEL and RHCOS boot image names. These images should have been already imported in your PowerVS service instance.
-Change the image names according to your environment. Ensure that you use the correct RHCOS image specific to the pre-release version</p>
-<pre><code>rhel_image_name     = &quot;&lt;rhel_or_centos_image-name&gt;&quot;
-rhcos_image_name    = &quot;&lt;rhcos-image-name&gt;&quot;
-</code></pre>
-<p>Note that the boot images should have a minimum disk size of 120GB</p>
-<p>This variable specifies the name of the private network that is configured in your PowerVS service instance.</p>
-<pre><code>network_name        = &quot;ocp-net&quot;
-</code></pre>
-<p>These set of variables specify the type of processor and physical system type to be used for the VMs.
-Change the default values according to your requirement.</p>
-<pre><code>processor_type      = &quot;shared&quot;  #Can be shared or dedicated
-system_type         = &quot;s922&quot;    #Can be either s922 or e980
-</code></pre>
 <p>These set of variables specify the username and the SSH key to be used for accessing the bastion node.</p>
 <pre><code>rhel_username               = &quot;root&quot;
 public_key_file             = &quot;data/id_rsa.pub&quot;
@@ -202,14 +144,10 @@ private_key_file            = &quot;data/id_rsa&quot;
 - Linux - https://www.siteground.com/kb/generate_ssh_key_in_linux/</p>
 <p>Create the SSH key-pair and keep it under the <code>data</code> directory</p>
 <p>These set of variables specify the RHEL subscription details.
-This is sensitive data, and if you don't want to save it on disk, use environment variables <code>RHEL_SUBS_USERNAME</code> and <code>RHEL_SUBS_PASSWORD</code> and pass them to <code>terraform apply</code> command as shown in the <a href="../quickstart/#setup-terraform-variables">Quickstart guide</a>.
-If you are using CentOS as the bastion image, then leave these variables as-is.</p>
+This is sensitive data, and if you don't want to save it on disk, use environment variables <code>RHEL_SUBS_USERNAME</code> and <code>RHEL_SUBS_PASSWORD</code> and 
+pass them to <code>terraform apply</code> command as shown in the <a href="../quickstart/#setup-terraform-variables">Quickstart guide</a>.</p>
 <pre><code>rhel_subscription_username  = &quot;user@test.com&quot;
 rhel_subscription_password  = &quot;mypassword&quot;
-</code></pre>
-<p>This variable specifies the number of hardware threads (SMT) that's used for the bastion node.
-Default setting should be fine for majority of the use-cases.</p>
-<pre><code>rhel_smt                    = 4
 </code></pre>
 <h3 id="openshift-installation-details">OpenShift Installation Details</h3>
 <p>These variables specify the URL for the OpenShift installer and client binaries.
@@ -236,6 +174,12 @@ Default value is <code>test-ocp</code></p>
 The total length of <code>cluster_id_prefix</code>.<code>cluster_id</code> should not exceed 14 characters.</p>
 <h3 id="misc-customizations">Misc Customizations</h3>
 <p>These variables provides miscellaneous customizations. For common usage scenarios these are not required and should be left unchanged.</p>
+<p>The following variable is used to set the network adapter type for the VMs. By default the VMs will use SEA. If SRIOV is required then uncomment the variable</p>
+<pre><code>network_type                = &quot;SRIOV&quot;
+</code></pre>
+<p>The following variable is used to specify the PowerVC <a href="https://www.ibm.com/support/knowledgecenter/SSVSPA_1.4.4/com.ibm.powervc.cloud.help.doc/powervc_storage_connectivity_groups_cloud.html">Storage Connectivity Group</a> (SCG). Empty value will use the default SCG</p>
+<pre><code>scg_id                      = &quot;&quot;
+</code></pre>
 <p>The following variables can be used for disconnected install by using a local mirror registry on the bastion node.</p>
 <pre><code>enable_local_registry      = false  #Set to true to enable usage of local registry for restricted network install.
 local_registry_image       = &quot;docker.io/ibmcom/registry-ppc64le:2.6.2.5&quot;
@@ -272,31 +216,26 @@ chrony_config_servers       = [ {server = &quot;0.centos.pool.ntp.org&quot;, opt
 </code></pre>
 <p>These set of variables are specific for cluster wide proxy configuration.
 Public internet access for the OpenShift cluster nodes is via Squid proxy deployed on the bastion.</p>
-<pre><code>setup_squid_proxy           = true
+<pre><code>setup_squid_proxy           = false
 </code></pre>
 <p>If you have a separate proxy, and don't want to set the Squid proxy on bastion then use the following variables.</p>
 <pre><code>setup_squid_proxy           = false
 proxy                       = {server = &quot;hostname_or_ip&quot;, port = &quot;3128&quot;, user = &quot;pxuser&quot;, password = &quot;pxpassword&quot;}
 </code></pre>
 <p>Except <code>server</code> all other attributes are optional. Default <code>port</code> is <code>3128</code> with unauthenticated access.</p>
+<p>The following variable allows using RAM disk for etcd. This is not meant for production use cases</p>
+<pre><code>mount_etcd_ramdisk          = false
+</code></pre>
 <p>These variables specify details about NFS storage that is setup by default on the bastion server.</p>
 <pre><code>storage_type                = &quot;nfs&quot;
 volume_size                 = &quot;300&quot; # Value in GB
-volume_type                 = &quot;tier3&quot;
-volume_shareable            = false
-</code></pre>
-<p>If you need to attach additional data volumes to the OpenShift cluster nodes use the following variables.</p>
-<pre><code>master_volume_size          = &quot;500&quot;
-worker_volume_size          = &quot;500&quot;
+volume_storage_template     = &quot;&quot;
 </code></pre>
 <p>The following variables are specific to upgrading an existing installation.</p>
-<pre><code>upgrade_image = &quot;&quot;
-upgrade_pause_time = &quot;90&quot;
-upgrade_delay_time = &quot;600&quot;
-</code></pre>
-<p>The following variables are specific to enable the connectivity between OCP nodes in PowerVS and IBM Cloud infrastructure over DirectLink.</p>
-<pre><code>ibm_cloud_dl_endpoint_net_cidr = &quot;&quot;
-ibm_cloud_http_proxy = &quot;&quot;
+<pre><code>upgrade_version            = &quot;&quot;
+upgrade_channel            = &quot;&quot;  #(stable-4.x, fast-4.x, candidate-4.x) eg. stable-4.5
+upgrade_pause_time         = &quot;90&quot;
+upgrade_delay_time         = &quot;600&quot;
 </code></pre>
               
             </div>
@@ -328,9 +267,9 @@ ibm_cloud_http_proxy = &quot;&quot;
       
     </span>
 </div>
-    <script>var base_url = '../../..';</script>
-    <script src="../../../js/theme.js" defer></script>
-      <script src="../../../search/main.js" defer></script>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
