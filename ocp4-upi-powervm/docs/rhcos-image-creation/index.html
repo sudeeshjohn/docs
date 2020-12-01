@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../../img/favicon.ico">
   <title>Rhcos image creation - Automation for OpenShift on IBM Power</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -24,7 +25,7 @@
   
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -35,6 +36,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../../.." class="icon icon-home"> Automation for OpenShift on IBM Power</a>
         <div role="search">
@@ -45,32 +47,24 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../../ocp4-upi-powervs/">Deploying OpenShift on IBM Cloud Power Virtual Servers</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../">Deploying OpenShift on PowerVM managed via PowerVC</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../../ocp4-upi-kvm/">Deploying OpenShift on KVM</a>
-	    </li>
-          
-        </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../ocp4-upi-powervs/">Deploying OpenShift on IBM Cloud Power Virtual Servers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../">Deploying OpenShift on PowerVM managed via PowerVC</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../ocp4-upi-kvm/">Deploying OpenShift on KVM</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -95,6 +89,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -105,9 +100,9 @@
 <li><a href="#option-1">Option-1</a></li>
 <li><a href="#option-2">Option-2</a></li>
 </ul>
-<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<h1 id="introduction">Introduction</h1>
 <p>Depending on your environment you can follow one of the options to create RHCOS (CoreOS) image in PowerVC</p>
-<h2 id="option-1">Option-1<a class="headerlink" href="#option-1" title="Permanent link">&para;</a></h2>
+<h2 id="option-1">Option-1</h2>
 <ol>
 <li>Download the RHCOS image from the following <a href="https://mirror.openshift.com/pub/openshift-v4/ppc64le/dependencies/rhcos/pre-release/latest/rhcos-openstack.ppc64le.qcow2.gz">link</a> on a system with public internet access.
 You'll need a way to transfer this image to a RHEL VM that you'll create in the next step.</li>
@@ -116,20 +111,16 @@ You'll need a way to transfer this image to a RHEL VM that you'll create in the 
 <li>Install <code>wget</code>, <code>qemu-img</code>, <code>parted</code> and <code>gzip</code> packages</li>
 <li>Transfer the downloaded RHCOS image to this VM</li>
 <li>Extract the image
-      <div class="highlight"><pre><span></span><code>$ gunzip rhcos-openstack.ppc64le.qcow2.gz
-</code></pre></div></li>
+      <code>$ gunzip rhcos-openstack.ppc64le.qcow2.gz</code></li>
 <li>Convert the CoreOS qcow2 image to raw image
-      <div class="highlight"><pre><span></span><code>$ qemu-img convert -f qcow2 -O raw rhcos-openstack.ppc64le.qcow2 rhcos-latest.raw
-</code></pre></div></li>
+      <code>$ qemu-img convert -f qcow2 -O raw rhcos-openstack.ppc64le.qcow2 rhcos-latest.raw</code></li>
 <li>Identify the disk device representing the additional empty volume attached to the VM
-      <div class="highlight"><pre><span></span><code>$ disk_device_list=$(sudo parted -l 2&gt;&amp;1 | grep -E -v &quot;$readonly&quot; | grep -E -i &quot;ERROR:&quot; |cut -f2 -d: | grep -v &quot;Can&#39;t&quot; | xargs -i echo &quot;Disk.{}:|&quot; | xargs echo | tr -d &#39; &#39; | rev | cut -c2- | rev)
-$ empty_disk_device=$(sudo fdisk -l | grep -E &quot;$disk_list&quot; | sort -k5nr | head -n 1 | tail -n1 | cut -f1 -d: | cut -f2 -d&#39; &#39;)
-$ echo &quot;$empty_disk_device&quot;&#39;
-</code></pre></div></li>
+      <code>$ disk_device_list=$(sudo parted -l 2&gt;&amp;1 | grep -E -v "$readonly" | grep -E -i "ERROR:" |cut -f2 -d: | grep -v "Can't" | xargs -i echo "Disk.{}:|" | xargs echo | tr -d ' ' | rev | cut -c2- | rev)
+      $ empty_disk_device=$(sudo fdisk -l | grep -E "$disk_list" | sort -k5nr | head -n 1 | tail -n1 | cut -f1 -d: | cut -f2 -d' ')
+      $ echo "$empty_disk_device"'</code></li>
 <li>
 <p>Dump the raw image to the newly added disk
-      <div class="highlight"><pre><span></span><code>$ dd if=rhcos-latest.raw of=${empty_disk_device} bs=4M
-</code></pre></div>
+      <code>$ dd if=rhcos-latest.raw of=${empty_disk_device} bs=4M</code>
       where <code>${empty_disk_device}</code> is the device representing the attached volume</p>
 </li>
 <li>
@@ -148,13 +139,13 @@ $ echo &quot;$empty_disk_device&quot;&#39;
 <p>Create the image by clicking on <strong>create</strong></p>
 </li>
 </ol>
-<h2 id="option-2">Option-2<a class="headerlink" href="#option-2" title="Permanent link">&para;</a></h2>
+<h2 id="option-2">Option-2</h2>
 <p>Creating and importing RHCOS OVA image</p>
 <ol>
 <li>Download the RHCOS image from the following <a href="https://mirror.openshift.com/pub/openshift-v4/ppc64le/dependencies/rhcos/pre-release/latest/rhcos-openstack.ppc64le.qcow2.gz">link</a> on a system with public internet access.
 You'll need a way to transfer this image to a RHEL VM that you'll create in the next step.</li>
 <li>Login to PowerVC and create a RHEL 8.x VM</li>
-<li>Use the script <a href="https://github.com/ocp-power-automation/infra/blob/master/scripts/images/convert_qcow2_ova.py">https://github.com/ocp-power-automation/infra/blob/master/scripts/images/convert_qcow2_ova.py</a> and
+<li>Use the script https://github.com/ocp-power-automation/infra/blob/master/scripts/images/convert_qcow2_ova.py and
    convert the RHCOS qcow2 image to an OVA formatted image.</li>
 <li>Follow the steps mentioned in <a href="https://www.ibm.com/support/knowledgecenter/SSVSPA_1.4.4/com.ibm.powervc.cloud.help.doc/powervc_import_image_cloud.html">PowerVC docs</a> to
    import the OVA image.</li>
@@ -172,7 +163,7 @@ You'll need a way to transfer this image to a RHEL VM that you'll create in the 
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -182,7 +173,7 @@ You'll need a way to transfer this image to a RHEL VM that you'll create in the 
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -192,6 +183,11 @@ You'll need a way to transfer this image to a RHEL VM that you'll create in the 
     <script>var base_url = '../../..';</script>
     <script src="../../../js/theme.js" defer></script>
       <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
