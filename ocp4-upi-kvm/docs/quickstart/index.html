@@ -100,7 +100,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installation-quickstart">Installation Quickstart</h1>
+                <h1 id="installation-quickstart">Installation Quickstart<a class="headerlink" href="#installation-quickstart" title="Permanent link">&para;</a></h1>
 <ul>
 <li><a href="#installation-quickstart">Installation Quickstart</a></li>
 <li><a href="#download-the-automation-code">Download the Automation Code</a></li>
@@ -118,33 +118,32 @@
 </li>
 <li><a href="#clean-up">Clean up</a></li>
 </ul>
-<h2 id="download-the-automation-code">Download the Automation Code</h2>
-<p>You'll need to use git to clone the deployment code when working off the master branch</p>
-<pre><code>git clone https://github.com/ocp-power-automation/ocp4-upi-kvm.git
+<h2 id="download-the-automation-code">Download the Automation Code<a class="headerlink" href="#download-the-automation-code" title="Permanent link">&para;</a></h2>
+<p>You'll need to use git to clone the deployment code when working off the master branch
+<div class="highlight"><pre><span></span><code>git clone https://github.com/ocp-power-automation/ocp4-upi-kvm.git
 cd ocp4_upi_kvm
-</code></pre>
+</code></pre></div></p>
 <p>All further instructions assumes you are in the code directory eg. <code>ocp4-upi-kvm</code></p>
-<h2 id="setup-terraform-variables">Setup Terraform Variables</h2>
+<h2 id="setup-terraform-variables">Setup Terraform Variables<a class="headerlink" href="#setup-terraform-variables" title="Permanent link">&para;</a></h2>
 <p>Update the <a href="../../var.tfvars">var.tfvars</a> based on your environment. Description of the variables are available in the following <a href="../var.tfvars-doc/">link</a>.
 You can use environment variables for sensitive data that should not be saved to disk.</p>
-<pre><code>$ set +o history
+<div class="highlight"><pre><span></span><code>$ set +o history
 $ export RHEL_SUBS_USERNAME=xxxxxxxxxxxxxxx
 $ export RHEL_SUBS_PASSWORD=xxxxxxxxxxxxxxx
 $ set -o history
-</code></pre>
-<h2 id="start-install">Start Install</h2>
+</code></pre></div>
+<h2 id="start-install">Start Install<a class="headerlink" href="#start-install" title="Permanent link">&para;</a></h2>
 <p>Run the following commands from within the directory.</p>
-<pre><code>$ terraform init
+<p><div class="highlight"><pre><span></span><code>$ terraform init
 $ terraform apply -var-file var.tfvars
-</code></pre>
-<p>If using environment variables for sensitive data, then do the following, instead.</p>
-<pre><code>$ terraform init
+</code></pre></div>
+If using environment variables for sensitive data, then do the following, instead.
+<div class="highlight"><pre><span></span><code>$ terraform init
 $ terraform apply -var-file var.tfvars -var rhel_subscription_username=&quot;$RHEL_SUBS_USERNAME&quot; -var rhel_subscription_password=&quot;$RHEL_SUBS_PASSWORD&quot;
-
-</code></pre>
-<p>Now wait for the installation to complete. It may take around 40 mins to complete provisioning.</p>
-<p>On successful install cluster details will be printed as shown below.</p>
-<pre><code>bastion_ip = 192.168.61.2
+</code></pre></div>
+Now wait for the installation to complete. It may take around 40 mins to complete provisioning.</p>
+<p>On successful install cluster details will be printed as shown below.
+<div class="highlight"><pre><span></span><code>bastion_ip = 192.168.61.2
 bastion_ssh_command = ssh root@192.168.61.2
 bootstrap_ip = 192.168.61.3
 cluster_id = test-cluster-9a4f
@@ -161,12 +160,12 @@ oc_server_url = https://api.test-cluster-9a4f.mydomain.com:6443/
 storageclass_name = nfs-storage-provisioner
 web_console_url = https://console-openshift-console.apps.test-cluster-9a4f.mydomain.com
 worker_ips = []
-</code></pre>
-<p>These details can be retrieved anytime by running the following command from the root folder of the code</p>
-<pre><code>$ terraform output
-</code></pre>
-<h2 id="post-install">Post Install</h2>
-<h4 id="delete-bootstrap-node">Delete Bootstrap Node</h4>
+</code></pre></div></p>
+<p>These details can be retrieved anytime by running the following command from the root folder of the code
+<div class="highlight"><pre><span></span><code>$ terraform output
+</code></pre></div></p>
+<h2 id="post-install">Post Install<a class="headerlink" href="#post-install" title="Permanent link">&para;</a></h2>
+<h4 id="delete-bootstrap-node">Delete Bootstrap Node<a class="headerlink" href="#delete-bootstrap-node" title="Permanent link">&para;</a></h4>
 <p>Once the deployment is completed successfully, you can safely delete the bootstrap node. This step is optional but recommended so as to free up the resources used.</p>
 <ol>
 <li>
@@ -176,60 +175,64 @@ worker_ips = []
 <p>Run command <code>terraform apply -var-file var.tfvars</code></p>
 </li>
 </ol>
-<h4 id="create-api-and-ingress-dns-records">Create API and Ingress DNS Records</h4>
+<h4 id="create-api-and-ingress-dns-records">Create API and Ingress DNS Records<a class="headerlink" href="#create-api-and-ingress-dns-records" title="Permanent link">&para;</a></h4>
 <p>You can use one of the following options.</p>
 <ol>
 <li>
 <p><strong>Add entries to your DNS server</strong></p>
 <p>The general format is shown below:
-<code>api.&lt;cluster_id&gt;.  IN  A  &lt;bastion_ip&gt;
-*.apps.&lt;cluster_id&gt;.  IN  A  &lt;bastion_ip&gt;</code>
+<div class="highlight"><pre><span></span><code>api.&lt;cluster_id&gt;.  IN  A  &lt;bastion_ip&gt;
+*.apps.&lt;cluster_id&gt;.  IN  A  &lt;bastion_ip&gt;
+</code></pre></div>
 You'll need <code>bastion_ip</code> and <code>cluster_id</code>. This is printed at the end of a successful install. Or you can retrieve it anytime by running <code>terraform output</code> from the install directory.
 For example, if <code>bastion_ip = 192.168.61.2</code> and <code>cluster_id = test-cluster-9a4f</code> then the following DNS records will need to be added.
-<code>api.test-cluster-9a4f.  IN  A  192.168.61.2
-*.apps.test-cluster-9a4f.  IN  A  192.168.61.2</code></p>
+<div class="highlight"><pre><span></span><code>api.test-cluster-9a4f.  IN  A  192.168.61.2
+*.apps.test-cluster-9a4f.  IN  A  192.168.61.2
+</code></pre></div></p>
 </li>
 <li>
 <p><strong>Add entries to your client system <code>hosts</code> file</strong></p>
 <p>For Linux and Mac <code>hosts</code> file is located at <code>/etc/hosts</code> and for Windows it's located at <code>c:\Windows\System32\Drivers\etc\hosts</code>.</p>
 <p>The general format is shown below:
-<code>&lt;bastion_ip&gt; api.&lt;cluster_id&gt;
+<div class="highlight"><pre><span></span><code>&lt;bastion_ip&gt; api.&lt;cluster_id&gt;
 &lt;bastion_ip&gt; console-openshift-console.apps.&lt;cluster_id&gt;
 &lt;bastion_ip&gt; integrated-oauth-server-openshift-authentication.apps.&lt;cluster_id&gt;
 &lt;bastion_ip&gt; oauth-openshift.apps.&lt;cluster_id&gt;
 &lt;bastion_ip&gt; prometheus-k8s-openshift-monitoring.apps.&lt;cluster_id&gt;
 &lt;bastion_ip&gt; grafana-openshift-monitoring.apps.&lt;cluster_id&gt;
-&lt;bastion_ip&gt; &lt;app name&gt;.apps.&lt;cluster_id&gt;</code></p>
+&lt;bastion_ip&gt; &lt;app name&gt;.apps.&lt;cluster_id&gt;
+</code></pre></div></p>
 <p>You'll need <code>etc_host_entries</code>. This is printed at the end of a successful install.
 Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
 <p>As an example, for the following <code>etc_hosts_entries</code>
-<code>etc_hosts_entries =
-192.168.61.2 api.test-cluster-9a4f.mydomain.com console-openshift-console.apps.test-cluster-9a4f.mydomain.com integrated-oauth-server-openshift-authentication.apps.test-cluster-9a4f.mydomain.com oauth-openshift.apps.test-cluster-9a4f.mydomain.com prometheus-k8s-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com grafana-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com example.apps.test-cluster-9a4f.mydomain.com</code>
+<div class="highlight"><pre><span></span><code>etc_hosts_entries =
+192.168.61.2 api.test-cluster-9a4f.mydomain.com console-openshift-console.apps.test-cluster-9a4f.mydomain.com integrated-oauth-server-openshift-authentication.apps.test-cluster-9a4f.mydomain.com oauth-openshift.apps.test-cluster-9a4f.mydomain.com prometheus-k8s-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com grafana-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com example.apps.test-cluster-9a4f.mydomain.com
+</code></pre></div>
 just add the following entry to the <code>hosts</code> file
-```
-[existing entries in hosts file]</p>
-<p>192.168.61.2 api.test-cluster-9a4f.mydomain.com console-openshift-console.apps.test-cluster-9a4f.mydomain.com integrated-oauth-server-openshift-authentication.apps.test-cluster-9a4f.mydomain.com oauth-openshift.apps.test-cluster-9a4f.mydomain.com prometheus-k8s-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com grafana-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com example.apps.test-cluster-9a4f.mydomain.com
-```</p>
+<div class="highlight"><pre><span></span><code>[existing entries in hosts file]
+
+192.168.61.2 api.test-cluster-9a4f.mydomain.com console-openshift-console.apps.test-cluster-9a4f.mydomain.com integrated-oauth-server-openshift-authentication.apps.test-cluster-9a4f.mydomain.com oauth-openshift.apps.test-cluster-9a4f.mydomain.com prometheus-k8s-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com grafana-openshift-monitoring.apps.test-cluster-9a4f.mydomain.com example.apps.test-cluster-9a4f.mydomain.com
+</code></pre></div></p>
 </li>
 </ol>
-<h2 id="cluster-access">Cluster Access</h2>
+<h2 id="cluster-access">Cluster Access<a class="headerlink" href="#cluster-access" title="Permanent link">&para;</a></h2>
 <p>OpenShift login credentials are in the bastion host and the location will be printed at the end of a successful install.
-Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
-<pre><code>[...]
+Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.
+<div class="highlight"><pre><span></span><code>[...]
 bastion_ip = 192.168.61.2
 bastion_ssh_command = ssh root@192.168.61.2
 [...]
-</code></pre>
-<p>There are two files under <code>~/openstack-upi/auth</code>
+</code></pre></div>
+There are two files under <code>~/openstack-upi/auth</code>
 - <strong>kubeconfig</strong>: can be used for CLI access
 - <strong>kubeadmin-password</strong>: Password for <code>kubeadmin</code> user which can be used for CLI, UI access</p>
 <blockquote>
 <p><strong>Note</strong>: Ensure you securely store the OpenShift cluster access credentials. If desired delete the access details from the bastion node after securely storing the same.</p>
 </blockquote>
-<p>You can copy the access details to your local system</p>
-<pre><code>$ scp -r -i data/id_rsa root@1192.168.61.2:~/openstack-upi/auth/\* .
-</code></pre>
-<h3 id="using-cli">Using CLI</h3>
+<p>You can copy the access details to your local system
+<div class="highlight"><pre><span></span><code>$ scp -r -i data/id_rsa root@1192.168.61.2:~/openstack-upi/auth/\* .
+</code></pre></div></p>
+<h3 id="using-cli">Using CLI<a class="headerlink" href="#using-cli" title="Permanent link">&para;</a></h3>
 <p>OpenShift CLI <code>oc</code> can be downloaded from the following links. Use the one specific to your client system architecture.</p>
 <ul>
 <li><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp-dev-preview/pre-release/openshift-client-mac.tar.gz">Mac OSX</a></li>
@@ -240,21 +243,21 @@ bastion_ssh_command = ssh root@192.168.61.2
 <p>Download the specific file, extract it and place the binary in a directory that is on your <code>PATH</code>
 For more details check the following <a href="https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html">link</a></p>
 <p>The CLI login URL <code>oc_server_url</code> will be printed at the end of successful install.
-Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
-<pre><code>[...]
+Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.
+<div class="highlight"><pre><span></span><code>[...]
 oc_server_url = https://test-cluster-9a4f.mydomain.com:6443
 [...]
-</code></pre>
-<p>In order to login the cluster you can use the <code>oc login &lt;oc_server_url&gt; -u kubeadmin -p &lt;kubeadmin-password&gt;</code>
-Example:</p>
-<pre><code>$ oc login https://test-cluster-9a4f.mydomain.com:6443 -u kubeadmin -p $(cat kubeadmin-password)
-</code></pre>
-<p>You can also use the <code>kubeconfig</code> file</p>
-<pre><code>$ export KUBECONFIG=$(pwd)/kubeconfig
+</code></pre></div>
+In order to login the cluster you can use the <code>oc login &lt;oc_server_url&gt; -u kubeadmin -p &lt;kubeadmin-password&gt;</code>
+Example:
+<div class="highlight"><pre><span></span><code>$ oc login https://test-cluster-9a4f.mydomain.com:6443 -u kubeadmin -p $(cat kubeadmin-password)
+</code></pre></div></p>
+<p>You can also use the <code>kubeconfig</code> file
+<div class="highlight"><pre><span></span><code>$ export KUBECONFIG=$(pwd)/kubeconfig
 $ oc cluster-info
 Kubernetes master is running at https://test-cluster-9a4f.mydomain.com:6443
 
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'
+To further debug and diagnose cluster problems, use &#39;kubectl cluster-info dump&#39;
 
 $ oc get nodes
 NAME       STATUS   ROLES    AGE   VERSION
@@ -263,19 +266,19 @@ master-1   Ready    master   13h   v1.18.3+b74c5ed
 master-2   Ready    master   13h   v1.18.3+b74c5ed
 worker-0   Ready    worker   13h   v1.18.3+b74c5ed
 worker-1   Ready    worker   13h   v1.18.3+b74c5ed
-</code></pre>
+</code></pre></div></p>
 <blockquote>
 <p><strong>Note:</strong> The OpenShift command-line client <code>oc</code> is already configured on the bastion node with kubeconfig placed at <code>~/.kube/config</code>.</p>
 </blockquote>
-<h3 id="using-web-ui">Using Web UI</h3>
+<h3 id="using-web-ui">Using Web UI<a class="headerlink" href="#using-web-ui" title="Permanent link">&para;</a></h3>
 <p>The web console URL will be printed at the end of a successful install.
-Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
-<pre><code>[...]
+Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.
+<div class="highlight"><pre><span></span><code>[...]
 web_console_url = https://console-openshift-console.apps.test-cluster-9a4f.mydomain.com
 [...]
-</code></pre>
+</code></pre></div></p>
 <p>Open this URL in your browser and login with user <code>kubeadmin</code> and password mentioned in the <code>kubeadmin-password</code> file.</p>
-<h2 id="clean-up">Clean up</h2>
+<h2 id="clean-up">Clean up<a class="headerlink" href="#clean-up" title="Permanent link">&para;</a></h2>
 <p>To destroy after you are done using the cluster you can run command <code>terraform destroy -var-file var.tfvars</code> to make sure that all resources are properly cleaned up.
 Do not manually clean up your environment unless both of the following are true:</p>
 <ol>

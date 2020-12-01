@@ -100,11 +100,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="terraform-providers">Terraform Providers</h1>
+                <h1 id="terraform-providers">Terraform Providers<a class="headerlink" href="#terraform-providers" title="Permanent link">&para;</a></h1>
 <p>At present Terraform registry does not support some plugins. Third-party providers can be manually installed using <a href="https://www.terraform.io/docs/commands/cli-config.html#filesystem_mirror">local filesystem as a mirror</a>. This is in addition to the provider plugins that are downloaded by Terraform during <code>terraform init</code>.</p>
 <p>Follow below steps based on your Terraform client machine to setup terraform providers. These steps are required to be followed before running the automation.</p>
-<p>Most of the steps require Go to be installed from https://golang.org/dl/. We recommed Go version above 1.14. Make sure to set your GOPATH environment variable and add $GOPATH/bin to PATH.</p>
-<h2 id="on-maclinux">On Mac/Linux</h2>
+<p>Most of the steps require Go to be installed from <a href="https://golang.org/dl/">https://golang.org/dl/</a>. We recommed Go version above 1.14. Make sure to set your GOPATH environment variable and add $GOPATH/bin to PATH.</p>
+<h2 id="on-maclinux">On Mac/Linux<a class="headerlink" href="#on-maclinux" title="Permanent link">&para;</a></h2>
 <p>Identify your platform. All example commands assume Linux as a platform:</p>
 <blockquote>
 <p>Linux: linux_amd64</p>
@@ -117,7 +117,7 @@
 </blockquote>
 <p><strong>Libvirt provider</strong>: Please refer to the section below for instructions on installing the libvirt provider plugin. For <a href="https://github.com/dmacvicar/terraform-provider-libvirt#building-from-source">more information</a>.</p>
 <p>Run below commands to install libvirt provider. Make sure to change <code>PLATFORM</code> and <code>PLUGIN_PATH</code> values based on your client machine.</p>
-<pre><code>PLATFORM=linux_amd64
+<div class="highlight"><pre><span></span><code>PLATFORM=linux_amd64
 PLUGIN_PATH=~/.local/share/terraform/plugins
 
 #Install the Libvirt provider plugin:
@@ -129,10 +129,10 @@ cd -
 # Create plugin directory and copy the binary
 mkdir -p $PLUGIN_PATH/registry.terraform.io/dmacvicar/libvirt/1.0.0/$PLATFORM/
 cp $GOPATH/bin/terraform-provider-libvirt $PLUGIN_PATH/registry.terraform.io/dmacvicar/libvirt/1.0.0/$PLATFORM/terraform-provider-libvirt
-</code></pre>
+</code></pre></div>
 <p>Upon successful completion. Please follow the instructions outlined here
-https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install</p>
-<h2 id="on-ibm-power-systems">On IBM Power Systems</h2>
+<a href="https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install">https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install</a></p>
+<h2 id="on-ibm-power-systems">On IBM Power Systems<a class="headerlink" href="#on-ibm-power-systems" title="Permanent link">&para;</a></h2>
 <p>Identify your platform. All example commands assume Linux as a platform:</p>
 <blockquote>
 <p>Linux: linux_ppc64le</p>
@@ -143,7 +143,7 @@ https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart
 </blockquote>
 <p>Make sure to change <code>PLATFORM</code> and <code>PLUGIN_PATH</code> values based on your client machine.</p>
 <p><strong>terraform-provider-libvirt</strong>: Please refer to the section below for instructions on installing the libvirt provider plugin. For <a href="https://github.com/dmacvicar/terraform-provider-libvirt#building-from-source">more information</a>.</p>
-<pre><code>PLATFORM=linux_ppc64le
+<div class="highlight"><pre><span></span><code>PLATFORM=linux_ppc64le
 PLUGIN_PATH=~/.local/share/terraform/plugins
 
 #Install the Libvirt provider plugin:
@@ -155,10 +155,10 @@ cd -
 # Create plugin directory and copy the binary
 mkdir -p $PLUGIN_PATH/registry.terraform.io/dmacvicar/libvirt/1.0.0/$PLATFORM/
 cp $GOPATH/bin/terraform-provider-libvirt $PLUGIN_PATH/registry.terraform.io/dmacvicar/libvirt/1.0.0/$PLATFORM/terraform-provider-libvirt
-</code></pre>
+</code></pre></div>
 <p><strong>terraform-provider-random</strong>: Please refer to the section below for instructions on installing the random provider plugin. For <a href="https://github.com/hashicorp/terraform-provider-random#building-the-provider">more information</a>.</p>
 <p>Note: Set <code>VERSION</code> to a compatible version eg. 2.3.0</p>
-<pre><code>VERSION=2.3.0
+<div class="highlight"><pre><span></span><code>VERSION=2.3.0
 PLATFORM=linux_ppc64le
 PLUGIN_PATH=~/.local/share/terraform/plugins
 
@@ -171,10 +171,10 @@ cd -
 # Create plugin directory and copy the binary
 mkdir -p $PLUGIN_PATH/registry.terraform.io/hashicorp/random/$VERSION/$PLATFORM/
 cp $GOPATH/bin/terraform-provider-random $PLUGIN_PATH/registry.terraform.io/hashicorp/random/$VERSION/$PLATFORM/terraform-provider-random
-</code></pre>
+</code></pre></div>
 <p><strong>terraform-provider-ignition</strong>: Please refer to the section below for instructions on installing the ignition provider plugin. For <a href="https://github.com/community-terraform-providers/terraform-provider-ignition#building-the-provider">more information</a>.</p>
 <p>Note: Set <code>VERSION</code> to a compatible version eg. 2.1.0</p>
-<pre><code>VERSION=2.1.0
+<div class="highlight"><pre><span></span><code>VERSION=2.1.0
 PLATFORM=linux_ppc64le
 PLUGIN_PATH=~/.local/share/terraform/plugins
 
@@ -187,10 +187,10 @@ cd -
 # Create plugin directory and copy the binary
 mkdir -p $PLUGIN_PATH/registry.terraform.io/terraform-providers/ignition/$VERSION/$PLATFORM/
 cp $GOPATH/bin/terraform-provider-ignition $PLUGIN_PATH/registry.terraform.io/terraform-providers/ignition/$VERSION/$PLATFORM/terraform-provider-ignition
-</code></pre>
+</code></pre></div>
 <p><strong>terraform-provider-null</strong>: Please refer to the section below for instructions on installing the null provider plugin. For <a href="https://github.com/hashicorp/terraform-provider-null#building-the-provider">more information</a>.</p>
 <p>Note: Set <code>VERSION</code> to a compatible version eg. 2.1.2</p>
-<pre><code>VERSION=2.1.2
+<div class="highlight"><pre><span></span><code>VERSION=2.1.2
 PLATFORM=linux_ppc64le
 PLUGIN_PATH=~/.local/share/terraform/plugins
 
@@ -203,9 +203,9 @@ cd -
 # Create plugin directory and copy the binary
 mkdir -p $PLUGIN_PATH/registry.terraform.io/hashicorp/null/$VERSION/$PLATFORM/
 cp $GOPATH/bin/terraform-provider-null $PLUGIN_PATH/registry.terraform.io/hashicorp/null/$VERSION/$PLATFORM/terraform-provider-null
-</code></pre>
+</code></pre></div>
 <p>Upon successful completion. Please follow the instructions outlined here
-https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install</p>
+<a href="https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install">https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install</a></p>
               
             </div>
           </div>
