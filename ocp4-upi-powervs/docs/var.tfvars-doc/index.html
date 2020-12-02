@@ -1,290 +1,109 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>How to use var.tfvars - Automation for OpenShift on IBM Power</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="../../../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
-    
-    
-      
-        <title>How to use var.tfvars - Automation for OpenShift on IBM Power</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.6910b76c.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.196e0c26.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#757575">
-        
-      
-    
-    
-    
-      
-        
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-    
-      
-    
-    
-  </head>
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../../css/extra.css" rel="stylesheet">
   
+  <script>
+    // Current page data
+    var mkdocs_page_name = "How to use var.tfvars";
+    var mkdocs_page_input_path = "ocp4-upi-powervs/docs/var.tfvars-doc.md";
+    var mkdocs_page_url = null;
+  </script>
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="orange">
-      
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#how-to-use-vartfvars" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
+</head>
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../../.." title="Automation for OpenShift on IBM Power" class="md-header-nav__button md-logo" aria-label="Automation for OpenShift on IBM Power">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 01-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5z"/></svg>
+<body class="wy-body-for-nav" role="document">
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            Automation for OpenShift on IBM Power
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              How to use var.tfvars
-            
-          </span>
-        </div>
-      
-    </div>
+  <div class="wy-grid-for-nav">
+
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Automation for OpenShift on IBM Power</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-    
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
           
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Automation for OpenShift on IBM Power" class="md-nav__button md-logo" aria-label="Automation for OpenShift on IBM Power">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 01-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5z"/></svg>
-
-    </a>
-    Automation for OpenShift on IBM Power
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../.." class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../" class="md-nav__link">
-      Deploying OpenShift on IBM Cloud Power Virtual Servers
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../../ocp4-upi-powervm/" class="md-nav__link">
-      Deploying OpenShift on PowerVM managed via PowerVC
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../../ocp4-upi-kvm/" class="md-nav__link">
-      Deploying OpenShift on KVM
-    </a>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-    <nav class="md-nav" aria-label="Introduction">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ibm-cloud-details" class="md-nav__link">
-    IBM Cloud Details
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#openshift-cluster-details" class="md-nav__link">
-    OpenShift Cluster Details
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#openshift-installation-details" class="md-nav__link">
-    OpenShift Installation Details
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#misc-customizations" class="md-nav__link">
-    Misc Customizations
-  </a>
-  
-</li>
-        
-      </ul>
+            <li class="toctree-l1">
+		
+    <a class="" href="../../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../">Deploying OpenShift on IBM Cloud Power Virtual Servers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../ocp4-upi-powervm/">Deploying OpenShift on PowerVM managed via PowerVC</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../ocp4-upi-kvm/">Deploying OpenShift on KVM</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
     </nav>
-  
-</li>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Automation for OpenShift on IBM Power</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>How to use var.tfvars</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                
-                <h1 id="how-to-use-vartfvars">How to use var.tfvars</h1>
+                <h1 id="how-to-use-vartfvars">How to use var.tfvars<a class="headerlink" href="#how-to-use-vartfvars" title="Permanent link"></a></h1>
 <ul>
 <li><a href="#how-to-use-vartfvars">How to use var.tfvars</a></li>
 <li><a href="#introduction">Introduction</a><ul>
@@ -295,10 +114,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="introduction">Introduction</h2>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
 <p>This guide gives an overview of the various terraform variables that are used for the deployment.
 The default values are set in <a href="../../variables.tf">variables.tf</a></p>
-<h3 id="ibm-cloud-details">IBM Cloud Details</h3>
+<h3 id="ibm-cloud-details">IBM Cloud Details<a class="headerlink" href="#ibm-cloud-details" title="Permanent link"></a></h3>
 <p>These set of variables specify the access key and PowerVS location details.</p>
 <pre><code>ibmcloud_api_key    = &quot;xyzaaaaaaaabcdeaaaaaa&quot;
 ibmcloud_region     = &quot;xya&quot;
@@ -342,7 +161,7 @@ service_instance_id = &quot;abc123xyzaaaa&quot;
    <code>ibmcloud_region     = eu-de
    ibmcloud_zone       = eu-de-1
    service_instance_id = 360a5df8-3f00-44b2-bd9f-d9a51fe53de6</code></p>
-<h3 id="openshift-cluster-details">OpenShift Cluster Details</h3>
+<h3 id="openshift-cluster-details">OpenShift Cluster Details<a class="headerlink" href="#openshift-cluster-details" title="Permanent link"></a></h3>
 <p>These set of variables specify the cluster capacity.</p>
 <p>Change the values as per your requirement.
 The defaults (recommended config) should suffice for most of the common use-cases.</p>
@@ -400,7 +219,7 @@ rhel_subscription_password  = &quot;mypassword&quot;
 Default setting should be fine for majority of the use-cases.</p>
 <pre><code>rhel_smt                    = 4
 </code></pre>
-<h3 id="openshift-installation-details">OpenShift Installation Details</h3>
+<h3 id="openshift-installation-details">OpenShift Installation Details<a class="headerlink" href="#openshift-installation-details" title="Permanent link"></a></h3>
 <p>These variables specify the URL for the OpenShift installer and client binaries.
 Change the URL to the specific pre-release version that you want to install on PowerVS.
 Reference link - <code>https://mirror.openshift.com/pub/openshift-v4/ppc64le/clients/ocp-dev-preview</code></p>
@@ -423,7 +242,7 @@ The <code>cluster_id_prefix</code> should not be more than 8 characters. Nodes a
 Default value is <code>test-ocp</code></p>
 <p>A random value will be used for <code>cluster_id</code> if not set.
 The total length of <code>cluster_id_prefix</code>.<code>cluster_id</code> should not exceed 14 characters.</p>
-<h3 id="misc-customizations">Misc Customizations</h3>
+<h3 id="misc-customizations">Misc Customizations<a class="headerlink" href="#misc-customizations" title="Permanent link"></a></h3>
 <p>These variables provides miscellaneous customizations. For common usage scenarios these are not required and should be left unchanged.</p>
 <p>The following variables can be used for disconnected install by using a local mirror registry on the bastion node.</p>
 <pre><code>enable_local_registry      = false  #Set to true to enable usage of local registry for restricted network install.
@@ -487,50 +306,39 @@ upgrade_delay_time = &quot;600&quot;
 <pre><code>ibm_cloud_dl_endpoint_net_cidr = &quot;&quot;
 ibm_cloud_http_proxy = &quot;&quot;
 </code></pre>
-                
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
-      
-        
-<footer class="md-footer">
+          <footer>
   
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
-      
-    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>
-        app = initialize({
-          base: "../../..",
-          features: ['tabs', 'instant'],
-          search: Object.assign({
-            worker: "../../../assets/javascripts/worker/search.4ac00218.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
       
-    
-  </body>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
 </html>
