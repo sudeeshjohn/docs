@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,7 +100,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-use-vartfvars">How to use var.tfvars<a class="headerlink" href="#how-to-use-vartfvars" title="Permanent link"></a></h1>
+                <h1 id="how-to-use-vartfvars">How to use var.tfvars</h1>
 <ul>
 <li><a href="#how-to-use-vartfvars">How to use var.tfvars</a></li>
 <li><a href="#introduction">Introduction</a><ul>
@@ -113,10 +111,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
+<h2 id="introduction">Introduction</h2>
 <p>This guide gives an overview of the various terraform variables that are used for the deployment.
 The default values are set in <a href="../../variables.tf">variables.tf</a></p>
-<h3 id="ibm-cloud-details">IBM Cloud Details<a class="headerlink" href="#ibm-cloud-details" title="Permanent link"></a></h3>
+<h3 id="ibm-cloud-details">IBM Cloud Details</h3>
 <p>These set of variables specify the access key and PowerVS location details.</p>
 <pre><code>ibmcloud_api_key    = &quot;xyzaaaaaaaabcdeaaaaaa&quot;
 ibmcloud_region     = &quot;xya&quot;
@@ -160,7 +158,7 @@ service_instance_id = &quot;abc123xyzaaaa&quot;
    <code>ibmcloud_region     = eu-de
    ibmcloud_zone       = eu-de-1
    service_instance_id = 360a5df8-3f00-44b2-bd9f-d9a51fe53de6</code></p>
-<h3 id="openshift-cluster-details">OpenShift Cluster Details<a class="headerlink" href="#openshift-cluster-details" title="Permanent link"></a></h3>
+<h3 id="openshift-cluster-details">OpenShift Cluster Details</h3>
 <p>These set of variables specify the cluster capacity.</p>
 <p>Change the values as per your requirement.
 The defaults (recommended config) should suffice for most of the common use-cases.</p>
@@ -218,7 +216,7 @@ rhel_subscription_password  = &quot;mypassword&quot;
 Default setting should be fine for majority of the use-cases.</p>
 <pre><code>rhel_smt                    = 4
 </code></pre>
-<h3 id="openshift-installation-details">OpenShift Installation Details<a class="headerlink" href="#openshift-installation-details" title="Permanent link"></a></h3>
+<h3 id="openshift-installation-details">OpenShift Installation Details</h3>
 <p>These variables specify the URL for the OpenShift installer and client binaries.
 Change the URL to the specific pre-release version that you want to install on PowerVS.
 Reference link - <code>https://mirror.openshift.com/pub/openshift-v4/ppc64le/clients/ocp-dev-preview</code></p>
@@ -241,7 +239,7 @@ The <code>cluster_id_prefix</code> should not be more than 8 characters. Nodes a
 Default value is <code>test-ocp</code></p>
 <p>A random value will be used for <code>cluster_id</code> if not set.
 The total length of <code>cluster_id_prefix</code>.<code>cluster_id</code> should not exceed 14 characters.</p>
-<h3 id="misc-customizations">Misc Customizations<a class="headerlink" href="#misc-customizations" title="Permanent link"></a></h3>
+<h3 id="misc-customizations">Misc Customizations</h3>
 <p>These variables provides miscellaneous customizations. For common usage scenarios these are not required and should be left unchanged.</p>
 <p>The following variables can be used for disconnected install by using a local mirror registry on the bastion node.</p>
 <pre><code>enable_local_registry      = false  #Set to true to enable usage of local registry for restricted network install.

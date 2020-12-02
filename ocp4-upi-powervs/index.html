@@ -25,8 +25,6 @@
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -122,7 +120,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link"></a></h1>
+                <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
 <li><a href="#table-of-contents">Table of Contents</a></li>
 <li><a href="#introduction">Introduction</a></li>
@@ -131,35 +129,28 @@
 <li><a href="#ocp-install">OCP Install</a></li>
 <li><a href="#contributing">Contributing</a></li>
 </ul>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
+<h2 id="introduction">Introduction</h2>
 <p>The <code>ocp4-upi-powervs</code> <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs">project</a> provides Terraform based automation code to help the deployment of OpenShift Container Platform (OCP) 4.x on <a href="https://www.ibm.com/cloud/power-virtual-server">IBM® Power Systems™ Virtual Server on IBM Cloud</a>.</p>
 <p>This project leverages the helpernode <a href="https://github.com/RedHatOfficial/ocp4-helpernode">ansible playbook</a> internally for OCP deployment on IBM Power Systems Virtual Servers (PowerVS).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For bugs/enhancement requests etc. please open a GitHub <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/issues">issue</a></p>
-</div>
-<p>For general PowerVS usage instructions please refer to the following links:</p>
-<ul>
-<li><a href="https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-getting-started">Power Systems Virtual Servers(IBM Cloud Docs)</a></li>
-<li><a href="https://www.youtube.com/watch?v=RywSfXT_LLs">IBM Power Systems in the Multicloud(Youtube video)</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PLVrJaTKVPbKM_9HU8fm4QsklgzLGUwFpv">PowerVS (Youtube video)</a></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>The <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/master">main</a> branch must be used with latest OCP pre-release versions only. For stable releases please checkout specific release branches - {<a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/release-4.5">release-4.5</a>, <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/release-4.6">release-4.6</a> ...} and follow the docs in the specific release branches.</strong></p>
-</div>
-<h2 id="automation-host-prerequisites">Automation Host Prerequisites<a class="headerlink" href="#automation-host-prerequisites" title="Permanent link"></a></h2>
+<p>:heavy_exclamation_mark: <em>For bugs/enhancement requests etc. please open a GitHub <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/issues">issue</a></em></p>
+<p>For general PowerVS usage instructions please refer to the following links:
+- https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-getting-started
+- https://www.youtube.com/watch?v=RywSfXT_LLs
+- https://www.youtube.com/playlist?list=PLVrJaTKVPbKM_9HU8fm4QsklgzLGUwFpv</p>
+<p>:information_source: <strong>The <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/master">main</a> branch must be used with latest OCP pre-release versions only.
+For stable releases please checkout specific release branches - {<a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/release-4.5">release-4.5</a>, <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/tree/release-4.6">release-4.6</a> ...} and follow the docs in the specific release branches.</strong></p>
+<h2 id="automation-host-prerequisites">Automation Host Prerequisites</h2>
 <p>The automation needs to run from a system with internet access. This could be your laptop or a VM with public internet connectivity. This automation code have been tested on the following Operating Systems:
 - Mac OSX (Darwin)
 - Linux (x86_64)
 - Windows 10</p>
 <p>Follow the <a href="docs/automation_host_prereqs/">guide</a> to complete the prerequisites.</p>
-<h2 id="powervs-prerequisites">PowerVS Prerequisites<a class="headerlink" href="#powervs-prerequisites" title="Permanent link"></a></h2>
+<h2 id="powervs-prerequisites">PowerVS Prerequisites</h2>
 <p>Follow the <a href="docs/ocp_prereqs_powervs/">guide</a> to complete the PowerVS prerequisites.</p>
-<h2 id="ocp-install">OCP Install<a class="headerlink" href="#ocp-install" title="Permanent link"></a></h2>
+<h2 id="ocp-install">OCP Install</h2>
 <p>Follow the <a href="docs/quickstart/">quickstart</a> guide for OCP installation on PowerVS.</p>
-<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link"></a></h2>
-<p>Please see the <a href="CONTRIBUTING/">contributing doc</a> for more details.
+<h2 id="contributing">Contributing</h2>
+<p>Please see the <a href="https://github.com/ocp-power-automation/ocp4-upi-powervs/blob/master/CONTRIBUTING.md">contributing doc</a> for more details.
 PRs are most welcome !!</p>
               
             </div>
@@ -213,5 +204,5 @@ PRs are most welcome !!</p>
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-12-02 07:42:28
+Build Date UTC : 2020-12-02 09:49:09
 -->

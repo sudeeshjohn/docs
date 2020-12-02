@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,11 +100,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="terraform-providers">Terraform Providers<a class="headerlink" href="#terraform-providers" title="Permanent link"></a></h1>
+                <h1 id="terraform-providers">Terraform Providers</h1>
 <p>At present Terraform registry does not support some plugins. Third-party providers can be manually installed using <a href="https://www.terraform.io/docs/commands/cli-config.html#filesystem_mirror">local filesystem as a mirror</a>. This is in addition to the provider plugins that are downloaded by Terraform during <code>terraform init</code>.</p>
 <p>Follow below steps based on your Terraform client machine to setup terraform providers. These steps are required to be followed before running the automation.</p>
 <p>Most of the steps require Go to be installed from https://golang.org/dl/. We recommed Go version above 1.14. Make sure to set your GOPATH environment variable and add $GOPATH/bin to PATH.</p>
-<h2 id="on-maclinux">On Mac/Linux<a class="headerlink" href="#on-maclinux" title="Permanent link"></a></h2>
+<h2 id="on-maclinux">On Mac/Linux</h2>
 <p>Identify your platform. All example commands assume Linux as a platform:</p>
 <blockquote>
 <p>Linux: linux_amd64</p>
@@ -134,7 +132,7 @@ cp $GOPATH/bin/terraform-provider-libvirt $PLUGIN_PATH/registry.terraform.io/dma
 </code></pre>
 <p>Upon successful completion. Please follow the instructions outlined here
 https://github.com/ocp-power-automation/ocp4-upi-kvm/blob/master/docs/quickstart.md#start-install</p>
-<h2 id="on-ibm-power-systems">On IBM Power Systems<a class="headerlink" href="#on-ibm-power-systems" title="Permanent link"></a></h2>
+<h2 id="on-ibm-power-systems">On IBM Power Systems</h2>
 <p>Identify your platform. All example commands assume Linux as a platform:</p>
 <blockquote>
 <p>Linux: linux_ppc64le</p>

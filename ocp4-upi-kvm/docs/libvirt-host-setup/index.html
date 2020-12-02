@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,7 +100,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="libvirt-host-setup">Libvirt Host Setup<a class="headerlink" href="#libvirt-host-setup" title="Permanent link"></a></h1>
+                <h1 id="libvirt-host-setup">Libvirt Host Setup</h1>
 <!-- TOC -->
 
 <ul>
@@ -118,21 +116,21 @@
 </li>
 </ul>
 <!-- /TOC -->
-<h2 id="libvirt-configuration">Libvirt Configuration<a class="headerlink" href="#libvirt-configuration" title="Permanent link"></a></h2>
+<h2 id="libvirt-configuration">Libvirt Configuration</h2>
 <p>The following steps are required to configure Libvirt to work with the automation code</p>
-<h3 id="install-and-configure-libvirt">Install and Configure Libvirt<a class="headerlink" href="#install-and-configure-libvirt" title="Permanent link"></a></h3>
+<h3 id="install-and-configure-libvirt">Install and Configure Libvirt</h3>
 <p>Please follow the steps given at <a href="https://github.com/openshift/installer/blob/master/docs/dev/libvirt/README.md#install-and-enable-libvirt">Install and Enable section</a></p>
-<h3 id="enable-ip-forwarding">Enable IP Forwarding<a class="headerlink" href="#enable-ip-forwarding" title="Permanent link"></a></h3>
+<h3 id="enable-ip-forwarding">Enable IP Forwarding</h3>
 <p>Please follow the steps given at <a href="https://github.com/openshift/installer/blob/master/docs/dev/libvirt/README.md#enable-ip-forwarding">IP forwarding section</a></p>
-<h3 id="accept-tcp-connections">Accept TCP connections<a class="headerlink" href="#accept-tcp-connections" title="Permanent link"></a></h3>
+<h3 id="accept-tcp-connections">Accept TCP connections</h3>
 <p>Please follow the steps given at <a href="https://github.com/openshift/installer/blob/master/docs/dev/libvirt/README.md#for-permanently-running-libvirt-daemon">Accept TCP connections section</a></p>
-<h3 id="allow-firewall-for-libvirt-connections">Allow Firewall for libvirt connections<a class="headerlink" href="#allow-firewall-for-libvirt-connections" title="Permanent link"></a></h3>
+<h3 id="allow-firewall-for-libvirt-connections">Allow Firewall for libvirt connections</h3>
 <p>Please follow the steps given at <a href="https://github.com/openshift/installer/blob/master/docs/dev/libvirt/README.md#firewalld">Firewalld section</a></p>
-<h3 id="password-less-access">Password less access<a class="headerlink" href="#password-less-access" title="Permanent link"></a></h3>
+<h3 id="password-less-access">Password less access</h3>
 <p>Follow below steps to add the public key of the Terraform client machine user to the authorized list for password-less access.
 1. Copy ~/.ssh/id_rsa.pub contents from Terraform client machine.
 2. Append the public key as copied above to ~/.ssh/authorized_keys on the KVM host.</p>
-<h3 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link"></a></h3>
+<h3 id="verification">Verification</h3>
 <p>You can verify TCP connections to the kvm host using an example <code>virsh</code> command given below.</p>
 <pre><code>virsh --connect qemu+tcp://&lt;host_name_or_ip&gt;/system --readonly
 </code></pre>

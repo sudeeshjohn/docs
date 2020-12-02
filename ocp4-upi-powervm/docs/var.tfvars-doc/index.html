@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,7 +100,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-use-vartfvars">How to use var.tfvars<a class="headerlink" href="#how-to-use-vartfvars" title="Permanent link"></a></h1>
+                <h1 id="how-to-use-vartfvars">How to use var.tfvars</h1>
 <ul>
 <li><a href="#how-to-use-vartfvars">How to use var.tfvars</a></li>
 <li><a href="#introduction">Introduction</a><ul>
@@ -113,10 +111,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
+<h2 id="introduction">Introduction</h2>
 <p>This guide gives an overview of the various terraform variables that are used for the deployment.
 The default values are set in <a href="../../variables.tf">variables.tf</a></p>
-<h3 id="powervc-details">PowerVC Details<a class="headerlink" href="#powervc-details" title="Permanent link"></a></h3>
+<h3 id="powervc-details">PowerVC Details</h3>
 <p>These set of variables specify the PowerVC details.</p>
 <pre><code>auth_url                    = &quot;&lt;https://&lt;HOSTNAME&gt;:5000/v3/&gt;&quot;
 user_name                   = &quot;&lt;powervc-login-user-name&gt;&quot;
@@ -130,7 +128,7 @@ domain_name                 = &quot;Default&quot;
 <p>This variable specifies the availability zone (PowerVC Host Group) in which to create the VMs. Leave it empty to use the "default" availability zone.</p>
 <pre><code>openstack_availability_zone = &quot;&quot;
 </code></pre>
-<h3 id="openshift-cluster-details">OpenShift Cluster Details<a class="headerlink" href="#openshift-cluster-details" title="Permanent link"></a></h3>
+<h3 id="openshift-cluster-details">OpenShift Cluster Details</h3>
 <p>These set of variables specify the cluster capacity.</p>
 <pre><code>bastion                     = {instance_type    = &quot;&lt;bastion-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhel&gt;&quot;}
 bootstrap                   = {instance_type    = &quot;&lt;bootstrap-compute-template&gt;&quot;, image_id    = &quot;&lt;image-uuid-rhcos&gt;&quot;,  &quot;count&quot;   = 1}
@@ -156,7 +154,7 @@ pass them to <code>terraform apply</code> command as shown in the <a href="../qu
 <pre><code>rhel_subscription_username  = &quot;user@test.com&quot;
 rhel_subscription_password  = &quot;mypassword&quot;
 </code></pre>
-<h3 id="openshift-installation-details">OpenShift Installation Details<a class="headerlink" href="#openshift-installation-details" title="Permanent link"></a></h3>
+<h3 id="openshift-installation-details">OpenShift Installation Details</h3>
 <p>These variables specify the URL for the OpenShift installer and client binaries.
 Change the URL to the specific pre-release version that you want to install on PowerVS.
 Reference link - <code>https://mirror.openshift.com/pub/openshift-v4/ppc64le/clients/ocp-dev-preview</code></p>
@@ -179,7 +177,7 @@ The <code>cluster_id_prefix</code> should not be more than 8 characters. Nodes a
 Default value is <code>test-ocp</code></p>
 <p>A random value will be used for <code>cluster_id</code> if not set.
 The total length of <code>cluster_id_prefix</code>.<code>cluster_id</code> should not exceed 14 characters.</p>
-<h3 id="misc-customizations">Misc Customizations<a class="headerlink" href="#misc-customizations" title="Permanent link"></a></h3>
+<h3 id="misc-customizations">Misc Customizations</h3>
 <p>These variables provides miscellaneous customizations. For common usage scenarios these are not required and should be left unchanged.</p>
 <p>The following variable is used to set the network adapter type for the VMs. By default the VMs will use SEA. If SRIOV is required then uncomment the variable</p>
 <pre><code>network_type                = &quot;SRIOV&quot;

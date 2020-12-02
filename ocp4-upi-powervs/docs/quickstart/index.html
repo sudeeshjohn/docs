@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,7 +100,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installation-quickstart">Installation Quickstart<a class="headerlink" href="#installation-quickstart" title="Permanent link"></a></h1>
+                <h1 id="installation-quickstart">Installation Quickstart</h1>
 <ul>
 <li><a href="#installation-quickstart">Installation Quickstart</a></li>
 <li><a href="#download-the-automation-code">Download the Automation Code</a></li>
@@ -120,13 +118,13 @@
 </li>
 <li><a href="#clean-up">Clean up</a></li>
 </ul>
-<h2 id="download-the-automation-code">Download the Automation Code<a class="headerlink" href="#download-the-automation-code" title="Permanent link"></a></h2>
+<h2 id="download-the-automation-code">Download the Automation Code</h2>
 <p>You'll need to use git to clone the deployment code when working off the master branch</p>
 <pre><code>$ git clone https://github.com/ocp-power-automation/ocp4-upi-powervs.git
 $ cd ocp4-upi-powervs
 </code></pre>
 <p>All further instructions assumes you are in the code directory eg. <code>ocp4-upi-powervs</code></p>
-<h2 id="setup-terraform-variables">Setup Terraform Variables<a class="headerlink" href="#setup-terraform-variables" title="Permanent link"></a></h2>
+<h2 id="setup-terraform-variables">Setup Terraform Variables</h2>
 <p>Update the <a href="../../var.tfvars">var.tfvars</a> based on your environment. Description of the variables are available in the following <a href="../var.tfvars-doc/">link</a>.
 You can use environment variables for sensitive data that should not be saved to disk.</p>
 <pre><code>$ set +o history
@@ -135,7 +133,7 @@ $ export RHEL_SUBS_USERNAME=xxxxxxxxxxxxxxx
 $ export RHEL_SUBS_PASSWORD=xxxxxxxxxxxxxxx
 $ set -o history
 </code></pre>
-<h2 id="start-install">Start Install<a class="headerlink" href="#start-install" title="Permanent link"></a></h2>
+<h2 id="start-install">Start Install</h2>
 <p>Run the following commands from within the directory.</p>
 <pre><code>$ terraform init
 $ terraform apply -var-file var.tfvars -parallelism=3
@@ -198,8 +196,8 @@ worker_ips = [
 <pre><code>$ terraform output
 </code></pre>
 <p>In case of any errors, you'll have to re-apply. Please refer to <a href="../known_issues/">known issues</a> to get more details on potential issues and workarounds.</p>
-<h2 id="post-install">Post Install<a class="headerlink" href="#post-install" title="Permanent link"></a></h2>
-<h4 id="delete-bootstrap-node">Delete Bootstrap Node<a class="headerlink" href="#delete-bootstrap-node" title="Permanent link"></a></h4>
+<h2 id="post-install">Post Install</h2>
+<h4 id="delete-bootstrap-node">Delete Bootstrap Node</h4>
 <p>Once the deployment is completed successfully, you can safely delete the bootstrap node. This step is optional but recommended so as to free up the resources used.</p>
 <ol>
 <li>
@@ -209,7 +207,7 @@ worker_ips = [
 <p>Run command <code>terraform apply -var-file var.tfvars</code></p>
 </li>
 </ol>
-<h4 id="create-api-and-ingress-dns-records">Create API and Ingress DNS Records<a class="headerlink" href="#create-api-and-ingress-dns-records" title="Permanent link"></a></h4>
+<h4 id="create-api-and-ingress-dns-records">Create API and Ingress DNS Records</h4>
 <p>Please skip this section if your <code>cluster_domain</code> is one of the online wildcard DNS domains: nip.io, xip.io and sslip.io.</p>
 <p>For all other domains, you can use one of the following options.</p>
 <ol>
@@ -246,7 +244,7 @@ just add the following entry to the <code>hosts</code> file
 ```</p>
 </li>
 </ol>
-<h2 id="cluster-access">Cluster Access<a class="headerlink" href="#cluster-access" title="Permanent link"></a></h2>
+<h2 id="cluster-access">Cluster Access</h2>
 <p>OpenShift login credentials are in the bastion host and the location will be printed at the end of a successful install.
 Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
 <pre><code>[...]
@@ -264,7 +262,7 @@ cluster_authentication_details = Cluster authentication details are available in
 <p>You can copy the access details to your local system</p>
 <pre><code>$ scp -r -i data/id_rsa root@158.175.161.118:~/openstack-upi/auth/\* .
 </code></pre>
-<h3 id="using-cli">Using CLI<a class="headerlink" href="#using-cli" title="Permanent link"></a></h3>
+<h3 id="using-cli">Using CLI</h3>
 <p>OpenShift CLI <code>oc</code> can be downloaded from the following links. Use the one specific to your client system architecture.</p>
 <ul>
 <li><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/oc/4.5/macosx/oc.tar.gz">Mac OSX</a></li>
@@ -301,7 +299,7 @@ worker-1   Ready    worker   13h   v1.18.3+b74c5ed
 <blockquote>
 <p><strong>Note:</strong> The OpenShift command-line client <code>oc</code> is already configured on the bastion node with kubeconfig placed at <code>~/.kube/config</code>.</p>
 </blockquote>
-<h3 id="using-web-ui">Using Web UI<a class="headerlink" href="#using-web-ui" title="Permanent link"></a></h3>
+<h3 id="using-web-ui">Using Web UI</h3>
 <p>The web console URL will be printed at the end of a successful install.
 Alternatively you can retrieve it anytime by running <code>terraform output</code> from the install directory.</p>
 <pre><code>[...]
@@ -309,7 +307,7 @@ web_console_url = https://console-openshift-console.apps.test-cluster-9a4f.mydom
 [...]
 </code></pre>
 <p>Open this URL in your browser and login with user <code>kubeadmin</code> and password mentioned in the <code>kubeadmin-password</code> file.</p>
-<h2 id="clean-up">Clean up<a class="headerlink" href="#clean-up" title="Permanent link"></a></h2>
+<h2 id="clean-up">Clean up</h2>
 <p>To destroy after you are done using the cluster you can run command <code>terraform destroy -var-file var.tfvars -parallelism=3</code> to make sure that all resources are properly cleaned up.
 Do not manually clean up your environment unless both of the following are true:</p>
 <ol>

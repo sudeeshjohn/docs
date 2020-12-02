@@ -25,8 +25,6 @@
   <script src="../../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -102,14 +100,14 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="create-masterworkerbootstrap-nodes"><strong>Create Master/Worker/Bootstrap Nodes</strong><a class="headerlink" href="#create-masterworkerbootstrap-nodes" title="Permanent link"></a></h2>
+                <h2 id="create-masterworkerbootstrap-nodes"><strong>Create Master/Worker/Bootstrap Nodes</strong></h2>
 <p>Create the below PowerVM LPARS with empty disk volume attached (refer the documentation <a href="https://docs.openshift.com/container-platform/4.3/installing/installing_ibm_power/installing-ibm-power.html#minimum-resource-requirements_installing-ibm-power">link</a> for resource requirements) and note the MAC ID for each of the LPARs.</p>
 <ul>
 <li>bootstrap - 1</li>
 <li>master  - 3</li>
 <li>worker - 2</li>
 </ul>
-<h2 id="create-and-setup-bastion-node"><strong>Create and Setup Bastion Node</strong><a class="headerlink" href="#create-and-setup-bastion-node" title="Permanent link"></a></h2>
+<h2 id="create-and-setup-bastion-node"><strong>Create and Setup Bastion Node</strong></h2>
 <ul>
 <li>Create RHEL 8.1 LPAR</li>
 <li>Login to the RHEL 8.1 LPAR and clone the OCP4 <a href="https://github.com/RedHatOfficial/ocp4-helpernode">helpernode</a> repo</li>
@@ -240,17 +238,17 @@ status: {}
 restorecon -vR /var/www/html/
 chmod o+r /var/www/html/ignition/*.ign
 </code></pre>
-<h2 id="boot-the-lpars"><strong>Boot the LPARs</strong><a class="headerlink" href="#boot-the-lpars" title="Permanent link"></a></h2>
+<h2 id="boot-the-lpars"><strong>Boot the LPARs</strong></h2>
 <p>Boot the LPARs in the following order and ensure the LPARs perform DHCP boot</p>
 <ol>
 <li>Bootstrap</li>
 <li>Masters</li>
 <li>Workers</li>
 </ol>
-<h2 id="wait-for-install"><strong>Wait for Install</strong><a class="headerlink" href="#wait-for-install" title="Permanent link"></a></h2>
+<h2 id="wait-for-install"><strong>Wait for Install</strong></h2>
 <pre><code>openshift-install wait-for bootstrap-complete --log-level debug
 </code></pre>
-<h2 id="finish-install"><strong>Finish Install</strong><a class="headerlink" href="#finish-install" title="Permanent link"></a></h2>
+<h2 id="finish-install"><strong>Finish Install</strong></h2>
 <p>First, login to your cluster</p>
 <pre><code>export KUBECONFIG=/root/ocp4/auth/kubeconfig
 </code></pre>
@@ -275,7 +273,7 @@ Normally it's automated. However, sometimes this needs to be done manually. Chec
 <pre><code>oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{&quot;spec&quot;:{&quot;defaultRoute&quot;:true}}'
 </code></pre>
 <p><strong>Note</strong> - You can watch the operators running with <code>oc get clusteroperators</code></p>
-<h2 id="login-to-the-web-console"><strong>Login to the web console</strong><a class="headerlink" href="#login-to-the-web-console" title="Permanent link"></a></h2>
+<h2 id="login-to-the-web-console"><strong>Login to the web console</strong></h2>
 <p>The OpenShift 4 web console will be running at <code>https://console-openshift-console.apps.{{ dns.clusterid }}.{{ dns.domain }} (e.g. https://console-openshift-console.apps.ocp4.example.com)</code></p>
 <ul>
 <li>Username: kubeadmin</li>
