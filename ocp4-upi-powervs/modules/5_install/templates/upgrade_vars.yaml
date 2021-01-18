@@ -1,5 +1,0 @@
----
-upgrade_image: "${upgrade_image}"
-pause_time: ${pause_time}
-delay_time: ${delay_time}
-
