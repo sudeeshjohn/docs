@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>**PowerVC Prerequisites** - Deploying OpenShift on IBM Power Systems</title>
+  <title>Command create - Deploying OpenShift on IBM Power Systems</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "**PowerVC Prerequisites**";
-    var mkdocs_page_input_path = "ocp4-upi-powervm/docs/ocp_prereqs_powervc.md";
+    var mkdocs_page_name = "Command create";
+    var mkdocs_page_input_path = "openshift-install-power/docs/create.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,12 +60,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../../openshift-install-power/">Deploying OpenShift on IBM Cloud Power Virtual Servers via Simple Bash Script</a>
+    <a class="" href="../../">Deploying OpenShift on IBM Cloud Power Virtual Servers via Simple Bash Script</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../">Deploying OpenShift on PowerVM managed via PowerVC</a>
+    <a class="" href="../../../ocp4-upi-powervm/">Deploying OpenShift on PowerVM managed via PowerVC</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -95,7 +95,7 @@
     
       
     
-    <li>**PowerVC Prerequisites**</li>
+    <li>Command create</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -105,28 +105,36 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="powervc-prerequisites"><strong>PowerVC Prerequisites</strong></h1>
-<h2 id="rhcos-and-rhel-8x-images-for-openshift">RHCOS and RHEL 8.X Images for OpenShift</h2>
-<p>You'll need to create RedHat CoreOS (RHCOS) and RHEL 8.2 (or later) image in PowerVC. RHEL 8.x image is used by bastion node, and RHCOS image is used for boostrap, master and worker nodes.</p>
-<p>For RHEL image creation follow the steps mentioned in the following <a href="https://www.ibm.com/support/knowledgecenter/en/SSXK2N_1.4.0/com.ibm.powervc.standard.help.doc/powervc_creating_initial_vm.html">doc</a></p>
-<p>For RHCOS image creation, follow the steps mentioned
-in the following <a href="../rhcos-image-creation/">doc</a>.</p>
-<h2 id="compute-templates">Compute Templates</h2>
-<p>You'll need to create <a href="https://www.ibm.com/support/knowledgecenter/en/SSXK2N_1.4.4/com.ibm.powervc.standard.help.doc/powervc_compute_template_hmc.html">compute templates</a> for bastion, bootstrap, master and worker nodes.</p>
-<p>Following are the recommended LPAR configs that you can use when creating the compute templates for different type of nodes</p>
-<ul>
-<li>Bootstrap, Master - 2 vCPUs, 16GB RAM, 120 GB Disk.</li>
-</ul>
-<p>PowerVM LPARs by default uses SMT=8. So with 2vCPUs, the number of logical CPUs as seen by the Operating System will be <strong>16</strong> (<code>2 vCPUs x 8 SMT</code>)</p>
-<p><strong><em>This config is suitable for majority of the scenarios</em></strong></p>
-<ul>
-<li>Worker - 2 vCPUs, 16GB RAM, 120 GB Disk</li>
-</ul>
-<p><strong><em>Increase worker vCPUs, RAM and Disk based on application requirements</em></strong></p>
-<ul>
-<li>Bastion - 2vCPUs, 16GB RAM, 200 GB Disk</li>
-</ul>
-<p><strong><em>Increase worker vCPUs, RAM and Disk based on application requirements</em></strong></p>
+                <h1 id="command-create">Command create</h1>
+<h2 id="what-it-does">What it does</h2>
+<p>This command when executed will start off the deployment process. You can optionally use other options are listed in the help menu.</p>
+<p>Accepts arguments:</p>
+<pre><code>  -verbose        Enable verbose for terraform console
+  -var            Terraform variable to be passed to the create/destroy command
+  -var-file       Terraform variable file name in current directory. (By default using var.tfvars)
+</code></pre>
+<p>The <code>create</code> command will check if all the tools are installed for the deployment to start. If not then it will run the <a href="../setup/">setup</a> command. Next, it will check if the variables file var.tfvars is available in the install directory or provided via argument <code>-var-file</code>, if not then it will run the <a href="../variables/">variables</a> command.</p>
+<p>The Terraform console log for each attempt will be stored in <code>logs/</code> directory with file name as <code>ocp4-upi-powervs_&lt;timestamp&gt;_apply_&lt;attempt_number&gt;.log</code>. These log files can be used for debugging purpose.</p>
+<h2 id="usage">Usage</h2>
+<p>When <code>setup</code> and/or <code>variables</code> commands are already completed.</p>
+<pre><code># openshift-install-powervs create
+[setup_tools] Verifying the latest packages and tools
+[powervs_login] Trying to login with the provided IBMCLOUD_API_KEY...
+Targeting service crn:v1:bluemix:public:power-iaas:tor01:a/65b64c1f1c29XXXXXXXXXc:4a7700b1-e318-476b-9bf6-5a88XXXXXXX981::...
+[init_terraform] Initializing Terraform plugins...
+[init_terraform] Validating Terraform code...
+[apply] Running terraform apply... please wait
+Attempt: 1/5
+[retry_terraform] Completed running the terraform command.
+Login to bastion: 'ssh -i automation/data/id_rsa root@145.48.43.53' and start using the 'oc' command.
+To access the cluster on local system when using 'oc' run: 'export KUBECONFIG=/root/ocp-install-dir/automation/kubeconfig'
+Access the OpenShift web-console here: https://console-openshift-console.apps.test-ocp-6f2c.ibm.com
+Login to the console with user: &quot;kubeadmin&quot;, and password: &quot;MHvmI-z5nY8-CBFKF-hmCDJ&quot;
+Add the line on local system 'hosts' file:
+145.48.43.53 api.test-ocp-6f2c.ibm.com console-openshift-console.apps.test-ocp-6f2c.ibm.com integrated-oauth-server-openshift-authentication.apps.test-ocp-6f2c.ibm.com oauth-openshift.apps.test-ocp-6f2c.ibm.com prometheus-k8s-openshift-monitoring.apps.test-ocp-6f2c.ibm.com grafana-openshift-monitoring.apps.test-ocp-6f2c.ibm.com example.apps.test-ocp-6f2c.ibm.com
+[cluster_access_info] SUCCESS: Congratulations! create command completed
+
+</code></pre>
               
             </div>
           </div>

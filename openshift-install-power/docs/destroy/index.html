@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>**PowerVC Prerequisites** - Deploying OpenShift on IBM Power Systems</title>
+  <title>Command destroy - Deploying OpenShift on IBM Power Systems</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "**PowerVC Prerequisites**";
-    var mkdocs_page_input_path = "ocp4-upi-powervm/docs/ocp_prereqs_powervc.md";
+    var mkdocs_page_name = "Command destroy";
+    var mkdocs_page_input_path = "openshift-install-power/docs/destroy.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,12 +60,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../../openshift-install-power/">Deploying OpenShift on IBM Cloud Power Virtual Servers via Simple Bash Script</a>
+    <a class="" href="../../">Deploying OpenShift on IBM Cloud Power Virtual Servers via Simple Bash Script</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../">Deploying OpenShift on PowerVM managed via PowerVC</a>
+    <a class="" href="../../../ocp4-upi-powervm/">Deploying OpenShift on PowerVM managed via PowerVC</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -95,7 +95,7 @@
     
       
     
-    <li>**PowerVC Prerequisites**</li>
+    <li>Command destroy</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -105,28 +105,37 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="powervc-prerequisites"><strong>PowerVC Prerequisites</strong></h1>
-<h2 id="rhcos-and-rhel-8x-images-for-openshift">RHCOS and RHEL 8.X Images for OpenShift</h2>
-<p>You'll need to create RedHat CoreOS (RHCOS) and RHEL 8.2 (or later) image in PowerVC. RHEL 8.x image is used by bastion node, and RHCOS image is used for boostrap, master and worker nodes.</p>
-<p>For RHEL image creation follow the steps mentioned in the following <a href="https://www.ibm.com/support/knowledgecenter/en/SSXK2N_1.4.0/com.ibm.powervc.standard.help.doc/powervc_creating_initial_vm.html">doc</a></p>
-<p>For RHCOS image creation, follow the steps mentioned
-in the following <a href="../rhcos-image-creation/">doc</a>.</p>
-<h2 id="compute-templates">Compute Templates</h2>
-<p>You'll need to create <a href="https://www.ibm.com/support/knowledgecenter/en/SSXK2N_1.4.4/com.ibm.powervc.standard.help.doc/powervc_compute_template_hmc.html">compute templates</a> for bastion, bootstrap, master and worker nodes.</p>
-<p>Following are the recommended LPAR configs that you can use when creating the compute templates for different type of nodes</p>
-<ul>
-<li>Bootstrap, Master - 2 vCPUs, 16GB RAM, 120 GB Disk.</li>
-</ul>
-<p>PowerVM LPARs by default uses SMT=8. So with 2vCPUs, the number of logical CPUs as seen by the Operating System will be <strong>16</strong> (<code>2 vCPUs x 8 SMT</code>)</p>
-<p><strong><em>This config is suitable for majority of the scenarios</em></strong></p>
-<ul>
-<li>Worker - 2 vCPUs, 16GB RAM, 120 GB Disk</li>
-</ul>
-<p><strong><em>Increase worker vCPUs, RAM and Disk based on application requirements</em></strong></p>
-<ul>
-<li>Bastion - 2vCPUs, 16GB RAM, 200 GB Disk</li>
-</ul>
-<p><strong><em>Increase worker vCPUs, RAM and Disk based on application requirements</em></strong></p>
+                <h1 id="command-destroy">Command destroy</h1>
+<h2 id="what-it-does">What it does</h2>
+<p>This command when executed will destroy the cluster that was created by the script. You can optionally use other options are listed in the help menu.</p>
+<p>Accepts arguments:</p>
+<pre><code>  -verbose        Enable verbose for terraform console
+  -var            Terraform variable to be passed to the create/destroy command
+  -var-file       Terraform variable file name in current directory. (By default using var.tfvars)
+  -force-destroy  Not ask for confirmation during destroy command
+</code></pre>
+<p>Ensure the cluster created using the <code>create</code> command is always destroyed using this script itself before you delete or change the install directory or its contents. Also make use of the same variables you had used for <code>create</code> command.</p>
+<p>The Terraform console log for each attempt will be stored in <code>logs/</code> directory with file name as <code>ocp4-upi-powervs_&lt;timestamp&gt;_destroy_&lt;attempt_number&gt;.log</code>. These log files can be used for debugging purpose.</p>
+<h2 id="usage">Usage</h2>
+<p>When the response is 'no' or any other input during the confirmation.</p>
+<pre><code># openshift-install-powervs destroy
+[question] &gt; Are you sure you want to proceed with destroy?
+1) yes
+2) no
+#? 2
+- You have answered: no
+[destroy] ERROR: Exiting on user request
+
+</code></pre>
+<p>When using <code>-force-destroy</code> option.</p>
+<pre><code># openshift-install-powervs destroy -force-destroy
+[main] WARN: Enabling forceful destruction option for terraform destroy command
+[destroy] Running terraform destroy... please wait
+Attempt: 1/5
+[retry_terraform] Completed running the terraform command.
+[destroy] SUCCESS: Done! destroy commmand completed
+
+</code></pre>
               
             </div>
           </div>
