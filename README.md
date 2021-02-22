@@ -12,7 +12,7 @@
     connect to http://127.0.0.1:8000 and validate the changes
     ```
 2. Commit the changes to git@github.com:ocp-power-automation/ocp-power-automation.github.io.git
-3. Run following command to create the github page
+3. Run following command to create the github page (mkdocs version 1.0.4)
     ``` $ cd ocp-power-automation/ocp-power-automation.github.io
         $ mkdocs gh-deploy --config-file  ./mkdocs.yml
     ```
